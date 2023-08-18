@@ -7,7 +7,7 @@ def encrypt(plain_text: str, key: str):
     while len(key) < len(plain_text):
         key += key
     for ch, k in zip(plain_text, key):
-        if ch.isalpha():
+        if ch.isalpha() and k.isalpha():
             res += chr(padding(ch)+(ord(ch)+ord(k) -
                        padding(k)-padding(ch)) % 26)
         else:
@@ -20,8 +20,8 @@ def decrypt(cipher_text: str, key: str):
     while len(key) < len(cipher_text):
         key += key
     for ch, k in zip(cipher_text, key):
-        if ch.isalpha():
-            res += chr(padding(ch)+(ord(ch)-ord(k) -
+        if ch.isalpha() and k.isalpha():
+            res += chr(padding(ch)+(ord(ch)-ord(k) +
                        padding(k)-padding(ch)) % 26)
         else:
             res += ch
